@@ -1,5 +1,5 @@
 # boto
-boto 2.0rc1
+boto 2.0lorax1
 02-Jun-2011
 
 ## Introduction

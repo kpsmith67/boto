@@ -414,7 +414,7 @@ class SDBConnection(AWSQueryConnection):
         self._build_name_value_list(params, attributes, replace)
         if expected_value:
             self._build_expected_value(params, expected_value)
-        return self.get_status('PutAttributes', params)
+        return self.get_result_set('PutAttributes', params)
 
     def batch_put_attributes(self, domain_or_name, items, replace=True):
         """
@@ -542,7 +542,7 @@ class SDBConnection(AWSQueryConnection):
                 self._build_name_value_list(params, attr_names)
         if expected_value:
             self._build_expected_value(params, expected_value)
-        return self.get_status('DeleteAttributes', params)
+        return self.get_result_set('DeleteAttributes', params)
 
     def batch_delete_attributes(self, domain_or_name, items):
         """

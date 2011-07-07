@@ -91,7 +91,8 @@ class Item(dict):
                 self[self.last_key] = value
         elif name == 'BoxUsage':
             try:
-                connection.box_usage += float(value)
+                self.box_usage = float(value)
+                connection.box_usage += self.box_usage
             except:
                 pass
         elif name == 'RequestId':

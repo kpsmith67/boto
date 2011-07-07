@@ -719,3 +719,23 @@ class AWSQueryConnection(AWSAuthConnection):
             boto.log.error('%s %s' % (response.status, response.reason))
             boto.log.error('%s' % body)
             raise self.ResponseError(response.status, response.reason, body)
+
+    # Copy/paste of get_status, but returns rs instead of rs.status
+    def get_result_set(self, action, params, path='/', parent=None, verb='GET'):
+        if not parent:
+            parent = self
+        response = self.make_request(action, params, path, verb)
+        body = response.read()
+        boto.log.debug(body)
+        if not body:
+            boto.log.error('Null body %s' % body)
+            raise self.ResponseError(response.status, response.reason, body)
+        elif response.status == 200:
+            rs = ResultSet()
+            h = boto.handler.XmlHandler(rs, parent)
+            xml.sax.parseString(body, h)
+            return rs
+        else:
+            boto.log.error('%s %s' % (response.status, response.reason))
+            boto.log.error('%s' % body)
+            raise self.ResponseError(response.status, response.reason, body)

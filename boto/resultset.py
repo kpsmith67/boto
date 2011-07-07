@@ -54,6 +54,7 @@ class ResultSet(list):
         self.is_truncated = False
         self.next_token = None
         self.status = True
+        self.box_usage = 0.0
 
     def startElement(self, name, attrs, connection):
         for t in self.markers:

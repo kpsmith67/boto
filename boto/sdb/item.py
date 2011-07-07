@@ -54,6 +54,7 @@ class Item(dict):
         self.encoding = None
         self.in_attribute = False
         self.converter = self.domain.connection.converter
+        self.box_usage = 0.0
 
     def startElement(self, name, attrs, connection):
         if name == 'Attribute':
